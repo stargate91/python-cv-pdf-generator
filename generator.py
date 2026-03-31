@@ -30,12 +30,14 @@ class CV(FPDF):
         self.text_gray = (80, 80, 80)
         self.border_gray = (200, 200, 200)
         
-        self.margin_x = 15
-        self.margin_y = 15
+        self.margin_x = 7.5 # Reduced to fit wider columns
+        self.margin_y = 10 # Slightly tighter
         self.page_width = 210
         self.col1_width = 115
-        self.col2_width = 56
-        self.gutter = 8
+        self.col2_width = 74 # User requested
+        self.gutter = 6
+
+
         
         self.set_auto_page_break(auto=True, margin=self.margin_y)
 
@@ -72,7 +74,7 @@ class CV(FPDF):
         
         # Check if profile picture is requested
         has_picture = 'image' in self.data and self.data['image']
-        pic_size = 32 if has_picture else 0
+        pic_size = 28 if has_picture else 0 # Was 32
         
         if has_picture:
             pic_path = self.data['image']
@@ -87,18 +89,18 @@ class CV(FPDF):
         
         # Name
         self.set_x(self.margin_x)
-        self.set_font("Helvetica", "B", 26)
+        self.set_font("Helvetica", "B", 24) # Was 26
         self.set_text_color(*self.text_black)
         name_width = self.page_width - self.margin_x*2 - pic_size - 5
-        self.multi_cell(name_width, 12, self.clean_text(self.data['name']).upper(), border=0, align='L', 
+        self.multi_cell(name_width, 10, self.clean_text(self.data['name']).upper(), border=0, align='L', # Was 12
                         new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         
         # Title
         if self.data.get('title'):
             self.set_x(self.margin_x)
-            self.set_font("Helvetica", "B", 13)
+            self.set_font("Helvetica", "B", 12) # Was 13
             self.set_text_color(*self.primary_blue)
-            self.multi_cell(name_width, 8, self.clean_text(self.data['title']), border=0, align='L',
+            self.multi_cell(name_width, 7, self.clean_text(self.data['title']), border=0, align='L', # Was 8
                             new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         
         # Contact Info with Icons
@@ -140,14 +142,14 @@ class CV(FPDF):
         self.set_draw_color(*self.primary_blue)
         self.set_line_width(0.6)
         self.line(self.margin_x, self.get_y(), self.page_width - self.margin_x, self.get_y())
-        self.ln(6)
+        self.ln(3) # Was 4
         return self.get_y()
 
     def section_header(self, title, width, x_pos):
         self.set_xy(x_pos, self.get_y())
-        self.set_font("Helvetica", "B", 11)
+        self.set_font("Helvetica", "B", 10.5) # Was 11
         self.set_text_color(0, 0, 0)
-        self.multi_cell(width, 7, title, border=0, align='L', new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+        self.multi_cell(width, 6, title, border=0, align='L', new_x=XPos.LMARGIN, new_y=YPos.NEXT) # Was 7
         
         y = self.get_y()
         self.set_draw_color(0, 0, 0)
@@ -158,7 +160,7 @@ class CV(FPDF):
     def generate(self, output_file):
         self.add_page()
         start_y = self.header_section()
-        
+        header_page = self.page  # Save the page number the header is on
         # We save the Y position after header
         col1_x = self.margin_x
         col2_x = self.margin_x + self.col1_width + self.gutter
@@ -170,14 +172,14 @@ class CV(FPDF):
         for job in self.data['experience']:
             # Job Header
             self.set_x(col1_x)
-            self.set_font("Helvetica", "B", 10)
+            self.set_font("Helvetica", "B", 9.5) # Was 10
             self.set_text_color(*self.text_black)
-            self.multi_cell(self.col1_width, 5, self.clean_text(job['role']), new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+            self.multi_cell(self.col1_width, 4.5, self.clean_text(job['role']), new_x=XPos.LMARGIN, new_y=YPos.NEXT) # Was 5
             
             self.set_x(col1_x)
-            self.set_font("Helvetica", "B", 10)
+            self.set_font("Helvetica", "B", 9.5) # Was 10
             self.set_text_color(*self.primary_blue)
-            self.multi_cell(self.col1_width, 5, self.clean_text(job['company']), new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+            self.multi_cell(self.col1_width, 4.5, self.clean_text(job['company']), new_x=XPos.LMARGIN, new_y=YPos.NEXT) # Was 5
             
             self.set_x(col1_x)
             self.set_font("Helvetica", "I", 8)
@@ -190,13 +192,13 @@ class CV(FPDF):
             self.ln(5)
             
             # Highlights
-            self.set_font("Helvetica", "", 9)
+            self.set_font("Helvetica", "", 8.5) # Was 9
             self.set_text_color(*self.text_black)
             for point in job['highlights']:
                 self.set_x(col1_x + self.c_margin)
-                self.cell(4, 5, chr(149) + " ")
-                self.multi_cell(self.col1_width - 5, 5, self.clean_text(point), new_x=XPos.LMARGIN, new_y=YPos.NEXT)
-            self.ln(5)
+                self.cell(4, 4, chr(149) + " ") # Was 4.5
+                self.multi_cell(self.col1_width - 5, 4, self.clean_text(point), new_x=XPos.LMARGIN, new_y=YPos.NEXT) # Was 4.5
+            self.ln(2.5) # Was 3
 
         # --- PROJECTS ---
         if 'projects' in self.data and self.data['projects']:
@@ -208,9 +210,9 @@ class CV(FPDF):
             for project in self.data['projects']:
                 # Project Name
                 self.set_x(col1_x)
-                self.set_font("Helvetica", "B", 10)
+                self.set_font("Helvetica", "B", 9.5) # Was 10
                 self.set_text_color(*self.text_black)
-                self.multi_cell(self.col1_width, 5, self.clean_text(project['name']), new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+                self.multi_cell(self.col1_width, 4.5, self.clean_text(project['name']), new_x=XPos.LMARGIN, new_y=YPos.NEXT) # Was 5
                 
                 # Optional Link (Blue)
                 if 'link' in project:
@@ -228,14 +230,15 @@ class CV(FPDF):
                 
                 # Description
                 self.set_x(col1_x)
-                self.set_font("Helvetica", "", 9)
+                self.set_font("Helvetica", "", 8.5) # Was 9
                 self.set_text_color(*self.text_black)
-                self.multi_cell(self.col1_width, 4, self.clean_text(project['description']), new_x=XPos.LMARGIN, new_y=YPos.NEXT)
-                self.ln(4)
+                self.multi_cell(self.col1_width, 3.8, self.clean_text(project['description']), new_x=XPos.LMARGIN, new_y=YPos.NEXT) # Was 4
+                self.ln(2.5) # Was 3
         
 
         # --- RIGHT COLUMN (Everything else) ---
-        # Note: We reset to the saved start_y
+        # Reset to the page where header finished to avoid slipping to Page 2
+        self.page = header_page # Essential fix for stable 2-column layout
         self.set_xy(col2_x, start_y)
         
         # Summary (Optional)
@@ -244,8 +247,8 @@ class CV(FPDF):
             self.set_font("Helvetica", "", 8.5)
             self.set_text_color(*self.text_black)
             self.set_x(col2_x)
-            self.multi_cell(self.col2_width, 4.5, self.clean_text(self.data['summary']).strip(), align='J', new_x=XPos.LEFT, new_y=YPos.NEXT)
-            self.ln(5) # Standardized 5mm gap
+            self.multi_cell(self.col2_width, 4.2, self.clean_text(self.data['summary']).strip(), align='J', new_x=XPos.LEFT, new_y=YPos.NEXT)
+            self.ln(3) # Was 5
         
         # Education (was Certifications)
         if 'education' in self.data and self.data['education']:
@@ -269,8 +272,15 @@ class CV(FPDF):
                 self.set_font("Helvetica", "I", 8)
                 self.set_text_color(*self.text_gray)
                 self.multi_cell(self.col2_width, 4, self.clean_text(edu['period']), new_x=XPos.LEFT, new_y=YPos.NEXT)
-                self.ln(3)
-            self.ln(2) # (3+2 = 5mm standardized gap)
+                
+                if 'description' in edu:
+                    self.set_x(col2_x)
+                    self.set_font("Helvetica", "", 7.5)
+                    self.set_text_color(*self.text_black)
+                    self.multi_cell(self.col2_width, 3.2, self.clean_text(edu['description']), new_x=XPos.LEFT, new_y=YPos.NEXT)
+                self.ln(2.5)
+            self.ln(1)
+
         
         # Languages
         self.set_x(col2_x)
@@ -283,29 +293,28 @@ class CV(FPDF):
             self.set_font("Helvetica", "", 8)
             self.cell(self.col2_width, 4, self.clean_text(lang['level']), new_x=XPos.LEFT, new_y=YPos.NEXT)
             
-            # Precise Dot Rating
-            y_dot = self.get_y() + 1
+            # Precise Dot Rating (Smaller 2mm dots)
+            y_dot = self.get_y() + 0.5
             for i in range(5):
-                # Offset by self.c_margin to align with the text start
                 self.set_draw_color(*self.primary_blue)
                 self.set_fill_color(*(self.primary_blue if i < lang['rating'] else (255, 255, 255)))
-                self.ellipse(col2_x + self.c_margin + (i*5), y_dot, 2.5, 2.5, 'FD')
-            self.set_y(y_dot + 7.5) # Clearing dots (2.5mm) + 5mm gap
+                self.ellipse(col2_x + self.c_margin + (i*4.5), y_dot, 2.2, 2.2, 'FD')
+            self.set_y(y_dot + 5.5) # clearing dots + 3mm gap (Was 7.5)
         
         # Skills
         self.set_x(col2_x)
         self.section_header("SKILLS", self.col2_width, col2_x)
         
-        tag_bg = (240, 240, 240)
-        tag_border = (200, 200, 200)
-        tag_padding = 2.5
-        tag_height = 6
+        tag_bg = (242, 242, 242) # Slightly lighter
+        tag_border = (210, 210, 210)
+        tag_padding = 2.0 # Was 2.5
+        tag_height = 5.2 # Was 6
         
         for group in self.data['skills']:
             self.set_x(col2_x)
-            self.set_font("Helvetica", "B", 9)
+            self.set_font("Helvetica", "B", 8.5) # Was 9
             self.set_text_color(*self.primary_blue)
-            self.multi_cell(self.col2_width, 5, self.clean_text(group['category']), new_x=XPos.LEFT, new_y=YPos.NEXT)
+            self.multi_cell(self.col2_width, 4.5, self.clean_text(group['category']), new_x=XPos.LEFT, new_y=YPos.NEXT) # Was 5
             
             # Start tag rendering
             self.set_font("Helvetica", "", 8)
@@ -337,18 +346,18 @@ class CV(FPDF):
                 self.set_xy(curr_x, curr_y + 0.5)
                 self.cell(box_w, tag_height - 1, text, align='C')
                 
-                curr_x += box_w + 1.5 # Space between tags
+                curr_x += box_w + 1.2 # Was 1.5
             
-            self.set_y(curr_y + tag_height + 2) # Spacing between groups
-        self.ln(3) # (2+3 = 5mm standardized gap)
+            self.set_y(curr_y + tag_height + 1.5) # Was 2
+        self.ln(1.5) # Was 3
         
         # Interests (Optional)
         if 'interests' in self.data and self.data['interests']:
             self.set_x(col2_x)
             self.section_header("INTERESTS", self.col2_width, col2_x)
             
-            # Optimized for narrow column (7.5pt, tight padding)
-            self.set_font("Helvetica", "", 7.5)
+            # Optimized for narrow column (7pt, tight padding)
+            self.set_font("Helvetica", "", 7) # Was 7.5
             self.set_text_color(*self.text_black)
             
             curr_x = col2_x
@@ -384,7 +393,7 @@ class CV(FPDF):
                 
                 curr_x += box_w + int_spacing
             
-            self.set_y(curr_y + tag_height + 5) # Standardized 5mm gap
+            self.set_y(curr_y + tag_height + 3) # Was 5
 
     def output_to_file(self, filename):
         print(f"Generating Template PDF: {filename}...")
