@@ -1,0 +1,73 @@
+# CV Data Template
+# Edit this file with your own information.
+
+name: "[YOUR FULL NAME]"
+title: "[YOUR PROFESSIONAL TITLE / ROLE]"
+contact:
+  phone: "[+00 000 000 000]"
+  email: "[your.email@example.com]"
+  location: "[City, Country / Remote-friendly]"
+  github: "[github.com/yourusername]"
+  linkedin: "[linkedin.com/in/yourprofile]"
+image: "assets/profile.jpg"
+
+summary: |
+  [Write a brief 3-4 sentence professional summary of your career, key strengths, and what you are looking for. Explain your expertise and value proposition.]
+
+experience:
+  - role: "[Job Title / Role Name]"
+    company: "[Company Name]"
+    period: "[Start Date] - [Present]"
+    location: "[City, Country]"
+    highlights:
+      - "[Major project or key achievement in this role]"
+      - "[Key responsibility or team leadership activity]"
+      - "[Specific technical problem solved or improved]"
+
+  - role: "[Previous Job Title]"
+    company: "[Previous Company Name]"
+    period: "[Start Date] - [End Date]"
+    location: "[City, Country]"
+    highlights:
+      - "[Description of what you did there]"
+      - "[Quantifiable results if possible]"
+
+projects:
+  - name: "[Main Project Name]"
+    link: "[github.com/yourusername/project]"
+    description: "[Briefly describe the project, your role, and the technologies used.]"
+  - name: "[Secondary Project / Side Project]"
+    link: "[yourportfolio.com]"
+    description: "[Focus on what problem this project solved or what you learned.]"
+
+skills:
+  # You can rename these categories, add new ones, or delete any as you need.
+  # The generator will automatically render as many skill blocks as you define below.
+  - category: "Technical Skills"
+    items: ["Python", "FPDF2", "YAML", "Git"]
+  - category: "Modern Frameworks"
+    items: ["FastAPI", "React", "Next.js", "TailwindCSS"]
+  - category: "Soft Skills"
+    items: ["Teamwork", "Problem Solving", "Effective Communication"]
+
+languages:
+  - name: "[Language 1]"
+    level: "[e.g. Native]"
+    rating: 5
+  - name: "[Language 2]"
+    level: "[e.g. Professional]"
+    rating: 3
+
+education:
+  - degree: "[Higher Degree Name / MSc / MA]"
+    institution: "[University / Institution Name]"
+    period: "[20XX - 20XX]"
+  - degree: "[Degree Name / BSc / BA]"
+    institution: "[University / Institution Name]"
+    period: "[20XX - 20XX]"
+
+interests:
+  - "Photography"
+  - "Hiking"
+  - "Open Source"
+  - "Travel"

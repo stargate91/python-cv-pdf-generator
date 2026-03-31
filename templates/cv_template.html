@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CV - {{ name }}</title>
+    <link rel="stylesheet" href="cv_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-info">
+                <h1>{{ name }}</h1>
+                <p class="title">{{ title }}</p>
+                <div class="contact-info">
+                    <span><i class="icon-phone"></i> {{ contact.phone }}</span>
+                    <span><i class="icon-email"></i> {{ contact.email }}</span>
+                    <span><i class="icon-location"></i> {{ contact.location }}</span>
+                </div>
+            </div>
+            <div class="profile-pic">
+                {% if image %}
+                <img src="{{ image }}" alt="Profile Picture">
+                {% else %}
+                <div class="pic-placeholder"></div>
+                {% endif %}
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Left Column: Experience -->
+            <div class="left-col">
+                <section class="experience">
+                    <h2>EXPERIENCE</h2>
+                    {% for job in experience %}
+                    <div class="job">
+                        <div class="job-header">
+                            <h3>{{ job.role }}</h3>
+                            <p class="company">{{ job.company }}</p>
+                            <p class="meta">
+                                <span class="period"><i class="icon-calendar"></i> {{ job.period }}</span>
+                                <span class="location"><i class="icon-map"></i> {{ job.location }}</span>
+                            </p>
+                        </div>
+                        <ul class="highlights">
+                            {% for highlight in job.highlights %}
+                            <li>{{ highlight }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% if not loop.last %}<hr class="job-sep">{% endif %}
+                    {% endfor %}
+                </section>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-col">
+                <section class="summary">
+                    <h2>SUMMARY</h2>
+                    <p>{{ summary }}</p>
+                </section>
+
+                <section class="certifications">
+                    <h2>CERTIFICATIONS</h2>
+                    <ul class="cert-list">
+                        {% for cert in certifications %}
+                        <li>{{ cert }}</li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+                <section class="languages">
+                    <h2>LANGUAGES</h2>
+                    {% for lang in languages %}
+                    <div class="lang">
+                        <div class="lang-info">
+                            <strong>{{ lang.name }}</strong>
+                            <span>{{ lang.level }}</span>
+                        </div>
+                        <div class="rating">
+                            {% for i in range(5) %}
+                            <span class="dot {% if i < lang.rating %}active{% endif %}"></span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </section>
+
+                <section class="skills">
+                    <h2>SKILLS</h2>
+                    {% for skill_group in skills %}
+                    <div class="skill-group">
+                        <h3>{{ skill_group.category }}</h3>
+                        <div class="skill-tags">
+                            {% for item in skill_group.items %}
+                            <span class="tag">{{ item }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

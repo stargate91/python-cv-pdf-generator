@@ -1,0 +1,70 @@
+name: "John Doe"
+title: "Senior Software Engineer"
+contact:
+  phone: "+1 234 567 890"
+  email: "john.doe@example.com"
+  location: "New York, USA / Remote"
+  github: "github.com/johndoe"
+  linkedin: "linkedin.com/in/johndoe"
+image: "assets/profile-picture.jpg"
+
+summary: |
+  Senior Software Engineer with 8+ years of experience in building scalable web applications. 
+  Expert in Python, React, and Cloud Architecture with a focus on high-performance systems.
+
+experience:
+  - role: "Senior Software Engineer"
+    company: "Tech-Forward Solutions"
+    period: "2019 - Present"
+    location: "New York, NY"
+    highlights:
+      - "Architected a microservices-based platform serving 1M+ active users, reducing latency by 40%."
+      - "Led a team of 6 developers in migrating a legacy monolith to a modern React/FastAPI stack."
+      - "Implemented CI/CD pipelines that reduced deployment time by 60% and improved code quality."
+
+  - role: "Software Developer"
+    company: "InnoSoft Systems"
+    period: "2016 - 2019"
+    location: "Austin, TX"
+    highlights:
+      - "Developed core features for a real-time data processing engine using Python and Redis."
+      - "Optimized SQL queries and database indexing, resulting in a 30% improvement in API response times."
+      - "Collaborated with the Product team to define technical requirements for new feature rollouts."
+
+projects:
+  - name: "TaskMaster Pro"
+    link: "github.com/johndoe/taskmaster-pro"
+    description: "A collaborative project management tool built with FastAPI and Next.js, featuring real-time updates via WebSockets."
+  - name: "EdgeSync"
+    link: "github.com/johndoe/edgesync"
+    description: "A personal portfolio and blog engine optimized for high-performance and SEO, using Static Site Generation."
+
+skills:
+  - category: "Technical Skills"
+    items: ["Python", "JS", "SQL", "Git", "Go"]
+  - category: "Modern Frameworks"
+    items: ["FastAPI", "React", "Docker", "K8s"]
+  - category: "Soft Skills"
+    items: ["Teamwork", "Agile", "Problem Solving"]
+
+languages:
+  - name: "English"
+    level: "Native"
+    rating: 5
+  - name: "German"
+    level: "Professional"
+    rating: 3
+
+education:
+  - degree: "MSc in Computer Science"
+    institution: "University of Texas"
+    period: "2014 - 2016"
+  - degree: "BSc in Software Engineering"
+    institution: "Tech State University"
+    period: "2010 - 2014"
+
+interests:
+  - "Open Source"
+  - "Hiking"
+  - "Photography"
+  - "Cycling"
