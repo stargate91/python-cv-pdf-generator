@@ -52,11 +52,7 @@ Place any custom icons in the `assets/` directory. The generator currently suppo
 - `phone.png`
 - `envelope-simple.png`
 - `map-pin.png`
-- `github-logo.png`
-- `linkedin-logo.png`
-- `calendar-gray.png`
-- `map-pin-gray.png`
-- `github-logo-gray.png`
+The project uses a set of professional gray icons located in the `assets/` directory. You can swap them or add new ones by following the existing naming convention in `generator.py`.
 
 ## License
 
