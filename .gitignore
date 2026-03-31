@@ -27,7 +27,7 @@ venv/
 ENV/
 
 # Output PDFs
-.pdf
+*.pdf
 
 # IDEs
 .idea/
@@ -35,3 +35,4 @@ ENV/
 
 # Project Specific
 .DS_Store
+cv_data.yaml
