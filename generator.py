@@ -41,7 +41,7 @@ class CV(FPDF):
         
         self.set_auto_page_break(auto=True, margin=self.margin_y)
 
-    def clean_text(self, text):
+    def clean_text(self, text, is_block=False):
         if not text: return ""
         replacements = {
             '\u2014': '-', '\u2013': '-', '\u2018': "'", '\u2019': "'",
@@ -49,6 +49,10 @@ class CV(FPDF):
         }
         for old, new in replacements.items():
             text = str(text).replace(old, new)
+        
+        if is_block:
+            # Replace newlines and multiple spaces with a single space to prevent "airy" stretching
+            text = re.sub(r'\s+', ' ', text).strip()
         return text
 
     def draw_icon_text(self, icon_name, text, x_offset, link=None):
@@ -65,7 +69,8 @@ class CV(FPDF):
             self.set_text_color(*self.text_gray)
             
         # We use cell to keep things on the same line but need to manage manual wrapping if needed
-        text_w = self.get_string_width(self.clean_text(text)) + 6
+        # Reduced padding from 6 to 2.5 to make it less "airy"
+        text_w = self.get_string_width(self.clean_text(text)) + 2.5
         self.cell(text_w, 5, self.clean_text(text), link=link)
         return text_w
 
@@ -174,12 +179,12 @@ class CV(FPDF):
             self.set_x(col1_x)
             self.set_font("Helvetica", "B", 9.5) # Was 10
             self.set_text_color(*self.text_black)
-            self.multi_cell(self.col1_width, 4.5, self.clean_text(job['role']), new_x=XPos.LMARGIN, new_y=YPos.NEXT) # Was 5
+            self.multi_cell(self.col1_width, 4.2, self.clean_text(job['role']), align='L', new_x=XPos.LMARGIN, new_y=YPos.NEXT)
             
             self.set_x(col1_x)
             self.set_font("Helvetica", "B", 9.5) # Was 10
             self.set_text_color(*self.primary_blue)
-            self.multi_cell(self.col1_width, 4.5, self.clean_text(job['company']), new_x=XPos.LMARGIN, new_y=YPos.NEXT) # Was 5
+            self.multi_cell(self.col1_width, 4.2, self.clean_text(job['company']), align='L', new_x=XPos.LMARGIN, new_y=YPos.NEXT)
             
             self.set_x(col1_x)
             self.set_font("Helvetica", "I", 8)
@@ -195,9 +200,8 @@ class CV(FPDF):
             self.set_font("Helvetica", "", 8.5) # Was 9
             self.set_text_color(*self.text_black)
             for point in job['highlights']:
-                self.set_x(col1_x + self.c_margin)
-                self.cell(4, 4, chr(149) + " ") # Was 4.5
-                self.multi_cell(self.col1_width - 5, 4, self.clean_text(point), new_x=XPos.LMARGIN, new_y=YPos.NEXT) # Was 4.5
+                self.cell(4, 3.8, chr(149) + " ") # Reduced line weight/height
+                self.multi_cell(self.col1_width - 5, 3.8, self.clean_text(point, is_block=True), align='L', new_x=XPos.LMARGIN, new_y=YPos.NEXT)
             self.ln(2.5) # Was 3
 
         # --- PROJECTS ---
@@ -212,7 +216,7 @@ class CV(FPDF):
                 self.set_x(col1_x)
                 self.set_font("Helvetica", "B", 9.5) # Was 10
                 self.set_text_color(*self.text_black)
-                self.multi_cell(self.col1_width, 4.5, self.clean_text(project['name']), new_x=XPos.LMARGIN, new_y=YPos.NEXT) # Was 5
+                self.multi_cell(self.col1_width, 4.2, self.clean_text(project['name']), align='L', new_x=XPos.LMARGIN, new_y=YPos.NEXT) # Was 5
                 
                 # Optional Link (Blue)
                 if 'link' in project:
@@ -232,7 +236,7 @@ class CV(FPDF):
                 self.set_x(col1_x)
                 self.set_font("Helvetica", "", 8.5) # Was 9
                 self.set_text_color(*self.text_black)
-                self.multi_cell(self.col1_width, 3.8, self.clean_text(project['description']), new_x=XPos.LMARGIN, new_y=YPos.NEXT) # Was 4
+                self.multi_cell(self.col1_width, 3.6, self.clean_text(project['description'], is_block=True), align='L', new_x=XPos.LMARGIN, new_y=YPos.NEXT) 
                 self.ln(2.5) # Was 3
         
 
@@ -247,7 +251,8 @@ class CV(FPDF):
             self.set_font("Helvetica", "", 8.5)
             self.set_text_color(*self.text_black)
             self.set_x(col2_x)
-            self.multi_cell(self.col2_width, 4.2, self.clean_text(self.data['summary']).strip(), align='J', new_x=XPos.LEFT, new_y=YPos.NEXT)
+            # Changed align='J' to 'L' and reduced height to 3.8
+            self.multi_cell(self.col2_width, 3.8, self.clean_text(self.data['summary'], is_block=True), align='L', new_x=XPos.LEFT, new_y=YPos.NEXT)
             self.ln(3) # Was 5
         
         # Education (was Certifications)
@@ -259,13 +264,13 @@ class CV(FPDF):
                 self.set_x(col2_x)
                 self.set_font("Helvetica", "B", 9)
                 self.set_text_color(*self.text_black)
-                self.multi_cell(self.col2_width, 4.5, self.clean_text(edu['degree']), new_x=XPos.LEFT, new_y=YPos.NEXT)
+                self.multi_cell(self.col2_width, 4.2, self.clean_text(edu['degree']), align='L', new_x=XPos.LEFT, new_y=YPos.NEXT)
                 
                 # Institution (Blue)
                 self.set_x(col2_x)
                 self.set_font("Helvetica", "B", 8.5)
                 self.set_text_color(*self.primary_blue)
-                self.multi_cell(self.col2_width, 4, self.clean_text(edu['institution']), new_x=XPos.LEFT, new_y=YPos.NEXT)
+                self.multi_cell(self.col2_width, 3.8, self.clean_text(edu['institution']), align='L', new_x=XPos.LEFT, new_y=YPos.NEXT)
                 
                 # Period (Italic)
                 self.set_x(col2_x)
@@ -277,7 +282,7 @@ class CV(FPDF):
                     self.set_x(col2_x)
                     self.set_font("Helvetica", "", 7.5)
                     self.set_text_color(*self.text_black)
-                    self.multi_cell(self.col2_width, 3.2, self.clean_text(edu['description']), new_x=XPos.LEFT, new_y=YPos.NEXT)
+                    self.multi_cell(self.col2_width, 3.2, self.clean_text(edu['description'], is_block=True), align='L', new_x=XPos.LEFT, new_y=YPos.NEXT)
                 self.ln(2.5)
             self.ln(1)
 
