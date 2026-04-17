@@ -1,0 +1,77 @@
+name: "Kovács János"
+title: "Szenior szoftverfejlesztő"
+contact:
+  phone: "+36 30 123 4567"
+  email: "janos.kovacs@pelda.hu"
+  location: "Budapest, Magyarország / Távmunka"
+  github: "github.com/kovacsjanos"
+  linkedin: "linkedin.com/in/kovacsjanos"
+image: "assets/profile-picture.jpg"
+
+summary: |
+  Szenior szoftverfejlesztő több mint 8 éves tapasztalattal a skálázható webes alkalmazások építésében. 
+  Szakértője a Python, React és felhőalapú architektúráknak, kiemelt fókusszal a nagy teljesítményű rendszerekre. 
+  Szeretek komplex architektúrális kihívásokon dolgozni és fejlesztői csapatokat a kiválóság felé vezetni.
+
+experience:
+  - role: "Szenior szoftverfejlesztő"
+    company: "Tech-Forward Solutions"
+    period: "2019. jan. – jelenleg"
+    location: "Budapest"
+    highlights:
+      - "Mikroszolgáltatás-alapú platform tervezése 1M+ aktív felhasználó számára, 40%-os késleltetés-csökkenést elérve."
+      - "Egy 6 fős fejlesztői csapat vezetése egy legacy monolit rendszer átalakításában modern React/FastAPI stackre."
+      - "CI/CD folyamatok bevezetése, ami 60%-kal csökkentette a telepítési időt és javította a kódminőséget."
+  - role: "Szoftverfejlesztő"
+    company: "InnoSoft Systems"
+    period: "2016. jún. – 2018. dec."
+    location: "Debrecen"
+    highlights:
+      - "Valós idejű adatfeldolgozó motor alapvető funkcióinak fejlesztése Python és Redis használatával."
+      - "SQL lekérdezések és adatbázis indexelés optimalizálása, ami 30%-os javulást eredményezett az API válaszidőkben."
+
+projects:
+  - name: "TaskMaster Pro"
+    link: "github.com/kovacsjanos/taskmaster-pro"
+    description: "Egy FastAPI és Next.js alapú együttműködési projektkezelő eszköz, valós idejű frissítésekkel és perzisztens állapotkezeléssel."
+  - name: "EdgeSync Engine"
+    link: "github.com/kovacsjanos/edgesync"
+    description: "Nagy teljesítményű adatszinkronizációs motor, amely kezeli a párhuzamos adatfolyamokat és biztosítja az adatkonzisztenciát."
+
+skills:
+  - category: "Szoftverfejlesztés"
+    items: ["Python", "JavaScript", "Go", "SQL", "FastAPI", "React", "Docker"]
+  - category: "Adatok és Rendszerek"
+    items: ["PostgreSQL", "Redis", "AWS", "Kubernetes", "CI/CD", "Git"]
+  - category: "Készségek és Módszertan"
+    items: ["Agile/Scrum", "Csapatvezetés", "Rendszertervezés", "Problémamegoldás"]
+
+languages:
+  - name: "Magyar"
+    level: "Anyanyelv"
+    rating: 5
+  - name: "Angol"
+    level: "Felsőfok"
+    rating: 4
+
+education:
+  - degree: "MSc Számítástechnika"
+    institution: "Debreceni Egyetem"
+    period: "2014. szept. – 2016. máj."
+    location: "Debrecen"
+    description: "Elosztott rendszerekre és gépi tanulásra szakosodva. Szakdolgozat a valós idejű adatátvitel optimalizálásáról."
+
+interests:
+  - "Nyílt forráskódú projektek"
+  - "Elosztott rendszerek"
+  - "Fotózás"
+  - "Túrázás és Természet"
+
+labels:
+  summary: "SZAKMAI ÖSSZEGZÉS"
+  experience: "TAPASZTALATOK"
+  projects: "PROJEKTEK"
+  education: "TANULMÁNYOK"
+  languages: "NYELVEK"
+  skills: "KÉSZSÉGEK"
+  interests: "ÉRDEKLŐDÉSI KÖR"

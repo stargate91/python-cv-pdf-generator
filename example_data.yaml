@@ -11,41 +11,40 @@ image: "assets/profile-picture.jpg"
 summary: |
   Senior Software Engineer with 8+ years of experience in building scalable web applications. 
   Expert in Python, React, and Cloud Architecture with a focus on high-performance systems.
+  I enjoy solving complex architectural problems and leading engineering teams towards excellence.
 
 experience:
   - role: "Senior Software Engineer"
     company: "Tech-Forward Solutions"
-    period: "2019 - Present"
+    period: "Jan 2019 – Present"
     location: "New York, NY"
     highlights:
       - "Architected a microservices-based platform serving 1M+ active users, reducing latency by 40%."
       - "Led a team of 6 developers in migrating a legacy monolith to a modern React/FastAPI stack."
       - "Implemented CI/CD pipelines that reduced deployment time by 60% and improved code quality."
-
   - role: "Software Developer"
     company: "InnoSoft Systems"
-    period: "2016 - 2019"
+    period: "June 2016 – Dec 2018"
     location: "Austin, TX"
     highlights:
       - "Developed core features for a real-time data processing engine using Python and Redis."
       - "Optimized SQL queries and database indexing, resulting in a 30% improvement in API response times."
-      - "Collaborated with the Product team to define technical requirements for new feature rollouts."
 
 projects:
   - name: "TaskMaster Pro"
     link: "github.com/johndoe/taskmaster-pro"
-    description: "A collaborative project management tool built with FastAPI and Next.js, featuring real-time updates via WebSockets."
-  - name: "EdgeSync"
+    description: "A collaborative project management tool built with FastAPI and Next.js, featuring real-time updates via WebSockets and persistent state management."
+  - name: "EdgeSync Engine"
     link: "github.com/johndoe/edgesync"
-    description: "A personal portfolio and blog engine optimized for high-performance and SEO, using Static Site Generation."
+    description: "A high-performance data synchronization engine that handles concurrent streams and ensures data consistency across distributed systems."
 
 skills:
-  - category: "Technical Skills"
-    items: ["Python", "JS", "SQL", "Git", "Go"]
-  - category: "Modern Frameworks"
-    items: ["FastAPI", "React", "Docker", "K8s"]
-  - category: "Soft Skills"
-    items: ["Teamwork", "Agile", "Problem Solving"]
+  - category: "Software & Development"
+    items: ["Python", "JavaScript", "Go", "SQL", "FastAPI", "React", "Docker"]
+  - category: "Data & Systems"
+    items: ["PostgreSQL", "Redis", "AWS", "Kubernetes", "CI/CD", "Git"]
+  - category: "Soft Skills & Methods"
+    items: ["Agile/Scrum", "Team Leadership", "System Design", "Problem Solving"]
 
 languages:
   - name: "English"
@@ -58,13 +57,21 @@ languages:
 education:
   - degree: "MSc in Computer Science"
     institution: "University of Texas"
-    period: "2014 - 2016"
-  - degree: "BSc in Software Engineering"
-    institution: "Tech State University"
-    period: "2010 - 2014"
+    period: "Sept 2014 – May 2016"
+    location: "Austin, TX"
+    description: "Specialized in Distributed Systems and Machine Learning. Thesis on optimizing real-time data throughput."
 
 interests:
-  - "Open Source"
-  - "Hiking"
+  - "Open Source Contribution"
+  - "Distributed Systems"
   - "Photography"
-  - "Cycling"
+  - "Hiking & Nature"
+
+labels:
+  summary: "SUMMARY"
+  experience: "EXPERIENCE"
+  projects: "PROJECTS"
+  education: "EDUCATION"
+  languages: "LANGUAGES"
+  skills: "SKILLS"
+  interests: "INTERESTS"

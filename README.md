@@ -1,19 +1,15 @@
 # Python CV PDF Generator
 
-A professional, data-driven CV generator built with Python and FPDF2. This tool allows you to maintain your CV data in a clean YAML format and generate a polished, two-column PDF layout automatically.
+A professional, data-driven CV generator built with Python and FPDF2. This tool allows you to maintain your professional data in a clean YAML format and generate polished, two-column PDF layouts automatically.
 
 ## Features
 
-- **Data-Driven**: Manage all your professional information in a single `cv_data.yaml` file.
-- **Two-Column Layout**: Professional design with a main focus on experience and projects, and a sidebar for skills, languages, and education.
-- **Visual Enhancements**: Includes modern icons for contact info, experience dates, locations, and social links.
-- **Dynamic Skill Tags**: Skills and interests are rendered as clean, bordered cards/tags.
-- **SEO-Friendly Filenames**: Automatically generates the output PDF filename based on your name and role (e.g., `cv_john_doe_software_engineer.pdf`).
-- **ASCII Normalization**: Handles special characters and accents in filenames for better compatibility.
-
-## Example Output
-
-You can see an example generated CV here: [example_cv.pdf](example_cv.pdf)
+- **Automated Dual-Generation**: By default, the generator processes both English (cv_data.yaml) and Hungarian (cv_data_hu.yaml) versions in a single run.
+- **Dynamic Layout**: Sections automatically collapse and the layout re-adjusts if specific information (such as experience, education, or interests) is omitted from the data source.
+- **Customizable Labels**: All section headers (e.g., Summary, Experience, Skills) can be overridden directly within the YAML files using a labels dictionary.
+- **Two-Column Design**: Professional layout featuring experience and projects in the main column, with a sidebar for skills, languages, and education.
+- **Smart Filenames**: Output PDF filenames are automatically generated based on the name and role defined in the data (e.g., cv_john_doe_software_engineer.pdf).
+- **Icon Integration**: Includes standardized professional icons for contact information and section highlights.
 
 ## Prerequisites
 
@@ -32,27 +28,44 @@ pip install -r requirements.txt
 
 ## Usage
 
-1. Open `cv_data.yaml` and fill in your professional details, including experience, projects, skills, and contact information.
-2. Add your profile picture (optional) to `assets/profile.jpg`.
-3. Run the generator script:
+### 1. Prepare Your Data
+The generator uses YAML files for input. You can use the provided examples as a starting point:
+- `cv_data.yaml`: Primary data file (typically English).
+- `cv_data_hu.yaml`: Secondary data file (typically Hungarian).
+
+### 2. Generate Your CV
+To generate both default CV versions at once, run:
 
 ```bash
 python generator.py
 ```
 
-The generator will create a PDF file in the root directory following the naming convention: `cv_[your_name]_[your_role].pdf`.
+To generate a specific CV from a custom YAML file, provide it as an argument:
+
+```bash
+python generator.py custom_data.yaml
+```
 
 ## Customization
 
-### Section Spacing
-The generator uses standardized vertical spacing (5mm) between sections in the right column to ensure a balanced layout. You can adjust the `SECTION_GAP` logic within `generator.py` if needed.
+### Section Labels
+You can change any section header by adding a `labels` section to your YAML file:
+
+```yaml
+labels:
+  summary: "PROFESSIONAL SUMMARY"
+  experience: "WORK HISTORY"
+  education: "STUDIES"
+```
+
+### Profile Picture
+Place your profile picture in the `assets/` directory (e.g., `assets/profile.jpg`) and reference the path in the `image` field of your YAML file.
 
 ### Icons
-Place any custom icons in the `assets/` directory. The generator currently supports:
-- `phone.png`
-- `envelope-simple.png`
-- `map-pin.png`
-The project uses a set of professional gray icons located in the `assets/` directory. You can swap them or add new ones by following the existing naming convention in `generator.py`.
+Standard icons are located in the `assets/` directory. The generator expects the following filenames for consistent styling:
+- `phone.png`, `envelope-simple.png`, `map-pin.png`
+- `github-logo.png`, `linkedin-logo.png`
+- `calendar-gray.png`, `map-pin-gray.png`
 
 ## License
 

@@ -36,3 +36,4 @@ ENV/
 # Project Specific
 .DS_Store
 cv_data.yaml
+cv_data_hu.yaml
